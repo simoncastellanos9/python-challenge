@@ -7,20 +7,31 @@ with open(csvpath) as csvfile:
     # CSV reader specifies delimiter and variable that holds contents
     csvreader = csv.reader(csvfile, delimiter=',')
 
-    print(csvreader)
+    #print(csvreader)
 
     # Read the header row first (skip this step if there is now header)
     csv_header = next(csvreader)
-    print(f"CSV Header: {csv_header}")
+    #print(f"CSV Header: {csv_header}")
 
-    # Read each row of data after the header
     total = 0
     i = 0
     length = 0
+    prevRow = 0
+    change = 0
+    changeCnt = 0
 
     for row in csvreader:
         total = total + int(row[1])
         length = length + 1
-        
-    print(length)
-    print(total)
+        if length>1:
+            change = int(row[1])-prevRow
+            changeCnt = changeCnt + change
+        prevRow = int(row[1])
+    aveChange = int(changeCnt/(length-1))    
+    print("\nFinancial Analysis")
+    print("----------------------------")
+    print(f"Total Months: {length}")
+    print(f"Total: ${total}")
+    print(f"Average  Change: ${aveChange}")
+    #print("Greatest Increase in Profits: Feb-2012 ($1926159)")
+    #print("Greatest Decrease in Profits: Sep-2013 ($-2196167)")
