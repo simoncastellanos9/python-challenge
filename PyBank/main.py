@@ -20,6 +20,7 @@ with open(csvpath) as csvfile:
     change = 0
     changeCnt = 0
     greatInc = 0
+    greatDec = 0
 
     for row in csvreader:
         total = total + int(row[1])
@@ -28,7 +29,10 @@ with open(csvpath) as csvfile:
             change = int(row[1])-prevRow
             if change > greatInc:
                 greatInc = change
-                greatMonth = row[0]
+                greatIncMonth = row[0]
+            if change < greatDec:
+                greatDec = change
+                greatDecMonth = row[0]
             changeCnt = changeCnt + change
         prevRow = int(row[1])
     aveChange = int(changeCnt/(length-1))    
@@ -37,5 +41,5 @@ with open(csvpath) as csvfile:
     print(f"Total Months: {length}")
     print(f"Total: ${total}")
     print(f"Average  Change: ${aveChange}")
-    print(f"Greatest Increase in Profits: {greatMonth} (${greatInc})")
-    #print("Greatest Decrease in Profits: Sep-2013 ($-2196167)")
+    print(f"Greatest Increase in Profits: {greatIncMonth} (${greatInc})")
+    print(f"Greatest Decrease in Profits: {greatDecMonth} (${greatDec})")
