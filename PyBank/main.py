@@ -35,7 +35,9 @@ with open(csvpath) as csvfile:
                 greatDecMonth = row[0]
             changeCnt = changeCnt + change
         prevRow = int(row[1])
-    aveChange = int(changeCnt/(length-1))    
+
+    aveChange = int(changeCnt/(length-1)) 
+       
     print("\nFinancial Analysis")
     print("----------------------------")
     print(f"Total Months: {length}")
