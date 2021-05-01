@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+#Folder
+PyPoll/Resources/election_data.csv
+
 # Distribution / packaging
 .Python
 build/
