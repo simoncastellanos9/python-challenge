@@ -1,7 +1,7 @@
 import os
 import csv
 
-csvpath = os.path.join('..','..','Downloads','election_data.csv')
+csvpath = os.path.join('Resources','election_data.csv')
 
 with open(csvpath) as csvfile:
     # CSV reader specifies delimiter and variable that holds contents
@@ -24,13 +24,12 @@ with open(csvpath) as csvfile:
     print(candidates)
     print(votes)
 
-    for i in range(len(votes)):
+    for i in range(len(candidates)):
         for row in csvreader:
             if row[2] == candidates[i]:
                 votes[i] = votes[i] + 1
         print(f"{candidates[i]} {votes[i]}")
     
-       
 
 
 #output_path = os.path.join("analysis", "results.csv")
