@@ -46,6 +46,13 @@ with open(csvpath) as csvfile:
     print(f"Greatest Increase in Profits: {greatIncMonth} (${greatInc})")
     print(f"Greatest Decrease in Profits: {greatDecMonth} (${greatDec})")
 
+
+index = ["Total Months","Total","Average Change", "Greatest Increase in Profits","Greatest Decrease in Profits"]
+var = [length,total,aveChange,greatInc,greatDec]
+mont = ["","","",greatIncMonth,greatDecMonth]
+
+rows = zip(index, var, mont)
+
 output_path = os.path.join("analysis", "results.csv")
 
 # Open the file using "write" mode. Specify the variable to hold the contents
@@ -55,7 +62,11 @@ with open(output_path, 'w') as csvfile:
     csvwriter = csv.writer(csvfile, delimiter=',')
 
     # Write the first row (column headers)
-    csvwriter.writerow([length,total,aveChange])
+    csvwriter.writerow(["Financial Analysis"])
 
-    # Write the second row
-    #csvwriter.writerow(['Caleb', 'Frost', '505-80-2901'])
+    #Write the second row
+
+    for w in range(5):
+        csvwriter.writerows(rows)
+    #csvwriter.writerow(rows)
+    
