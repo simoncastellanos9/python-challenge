@@ -45,3 +45,17 @@ with open(csvpath) as csvfile:
     print(f"Average  Change: ${aveChange}")
     print(f"Greatest Increase in Profits: {greatIncMonth} (${greatInc})")
     print(f"Greatest Decrease in Profits: {greatDecMonth} (${greatDec})")
+
+output_path = os.path.join("analysis", "results.csv")
+
+# Open the file using "write" mode. Specify the variable to hold the contents
+with open(output_path, 'w') as csvfile:
+
+    # Initialize csv.writer
+    csvwriter = csv.writer(csvfile, delimiter=',')
+
+    # Write the first row (column headers)
+    csvwriter.writerow([length,total,aveChange])
+
+    # Write the second row
+    #csvwriter.writerow(['Caleb', 'Frost', '505-80-2901'])
