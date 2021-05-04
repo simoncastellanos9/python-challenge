@@ -16,6 +16,7 @@ with open(csvpath) as csvfile:
 
     candidates = []
     votes = []
+    perVotes = []
     electionresults = []
     maxVotes = 0
 
@@ -23,6 +24,7 @@ with open(csvpath) as csvfile:
         if row[2] not in candidates:
             candidates.append(row[2])
             votes.append(0)
+            perVotes.append(0)
         electionresults.append(row[2])
     
 
@@ -34,25 +36,33 @@ with open(csvpath) as csvfile:
         for candidate in electionresults:
             if candidate == candidates[i]:
                 votes[i] = votes[i] + 1       
-        perVotes = "{:.3%}".format(votes[i]/totalVotes)         
-        print(f"{candidates[i]}: {perVotes}  ({votes[i]})")
+        perVotes[i] = "{:.3%}".format(votes[i]/totalVotes)         
+        print(f"{candidates[i]}: {perVotes[i]}  ({votes[i]})")
         if votes[i] > maxVotes:
             maxVotes = votes[i]
             winner = candidates[i]
 
     print(f"-------------------------\nWinner: {winner}\n-------------------------")
-        
-    #print(sum(votes))
-#output_path = os.path.join("analysis", "results.csv")
+
+
+candidatesZip = zip(candidates,perVotes,votes)
+
+
+output_path = os.path.join("analysis", "results.csv")
 
 # Open the file using "write" mode. Specify the variable to hold the contents
-#with open(output_path, 'w') as csvfile:
+with open(output_path, 'w') as csvfile:
 
     # Initialize csv.writer
-    #csvwriter = csv.writer(csvfile, delimiter=',')
+    csvwriter = csv.writer(csvfile, delimiter=',')
 
     # Write the first row (column headers)
-    #csvwriter.writerow(["Financial Analysis"])
+    csvwriter.writerow(["Election Results"])
+    csvwriter.writerow(['Total Votes: ',totalVotes])
+    for w in range(len(candidates)):
+        csvwriter.writerows(candidatesZip)
+    csvwriter.writerow(['Winner: ',winner])
+
 
     #Write the second row
 
