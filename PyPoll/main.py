@@ -1,7 +1,8 @@
 import os
 import csv
 
-csvpath = os.path.join('Resources','election_data.csv')
+#csvpath = os.path.join('Resources','election_data.csv')
+csvpath = os.path.join('..','..','Downloads','election_data.csv')
 
 with open(csvpath) as csvfile:
     # CSV reader specifies delimiter and variable that holds contents
@@ -15,23 +16,33 @@ with open(csvpath) as csvfile:
 
     candidates = []
     votes = []
+    electionresults = []
+    maxVotes = 0
 
     for row in csvreader:
         if row[2] not in candidates:
             candidates.append(row[2])
             votes.append(0)
-
-    print(candidates)
-    print(votes)
-
-    for i in range(len(candidates)):
-        for row in csvreader:
-            if row[2] == candidates[i]:
-                votes[i] = votes[i] + 1
-        print(f"{candidates[i]} {votes[i]}")
+        electionresults.append(row[2])
     
 
+    totalVotes = (int(len(electionresults)))
+    print("Election Results\n-------------------------")
+    print(f"Total Votes: {totalVotes}\n-------------------------")
 
+    for i in range(len(candidates)):
+        for candidate in electionresults:
+            if candidate == candidates[i]:
+                votes[i] = votes[i] + 1       
+        perVotes = "{:.3%}".format(votes[i]/totalVotes)         
+        print(f"{candidates[i]}: {perVotes}  ({votes[i]})")
+        if votes[i] > maxVotes:
+            maxVotes = votes[i]
+            winner = candidates[i]
+
+    print(f"-------------------------\nWinner: {winner}\n-------------------------")
+        
+    #print(sum(votes))
 #output_path = os.path.join("analysis", "results.csv")
 
 # Open the file using "write" mode. Specify the variable to hold the contents
