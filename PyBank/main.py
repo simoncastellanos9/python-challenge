@@ -4,10 +4,7 @@ import csv
 csvpath = os.path.join('Resources', 'budget_data.csv')
 
 with open(csvpath) as csvfile:
-    # CSV reader specifies delimiter and variable that holds contents
     csvreader = csv.reader(csvfile, delimiter=',')
-
-    #print(csvreader)
 
     # Read the header row first (skip this step if there is now header)
     csv_header = next(csvreader)
@@ -22,8 +19,10 @@ with open(csvpath) as csvfile:
     greatInc = 0
     greatDec = 0
 
+    #Calculate info from csv file
     for row in csvreader:
         total = total + int(row[1])
+        #has to start counting change at second row
         length = length + 1
         if length>1:
             change = int(row[1])-prevRow
@@ -34,16 +33,17 @@ with open(csvpath) as csvfile:
                 greatDec = change
                 greatDecMonth = row[0]
             changeCnt = changeCnt + change
+        #place holder to calculate difference
         prevRow = int(row[1])
     
-
+    #Format to currency
     total = "${:.0f}".format(total)
     aveChange = "${:.2f}".format(int(changeCnt/(length-1)))
     greatInc = "${:.0f}".format(greatInc)
     greatDec = "${:.0f}".format(greatDec)
 
-    print("\nFinancial Analysis")
-    print("----------------------------")
+    #Print to terminal
+    print("\nFinancial Analysis\n----------------------------")
     print(f"Total Months: {length}")
     print(f"Total: {total}")
     print(f"Average  Change: {aveChange}")
@@ -66,11 +66,9 @@ with open(output_path, 'w') as csvfile:
     csvwriter = csv.writer(csvfile, delimiter=',')
 
     # Write the first row (column headers)
-    csvwriter.writerow(["Financial Analysis"])
+    csvwriter.writerow(["Financial Analysis", "QTY", "Month"])
 
     #Write the second row
-
     for w in range(5):
         csvwriter.writerows(rows)
-    #csvwriter.writerow(rows)
     
