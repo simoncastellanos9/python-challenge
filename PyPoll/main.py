@@ -8,11 +8,8 @@ with open(csvpath) as csvfile:
     # CSV reader specifies delimiter and variable that holds contents
     csvreader = csv.reader(csvfile, delimiter=',')
 
-    #print(csvreader)
-
     # Read the header row first (skip this step if there is now header)
     csv_header = next(csvreader)
-    #print(f"CSV Header: {csv_header}")
 
     candidates = []
     votes = []
@@ -20,6 +17,7 @@ with open(csvpath) as csvfile:
     electionresults = []
     maxVotes = 0
 
+    #Create unique list for candidates, and initial list for votes and percentage according to number of candidates
     for row in csvreader:
         if row[2] not in candidates:
             candidates.append(row[2])
@@ -29,6 +27,8 @@ with open(csvpath) as csvfile:
     
 
     totalVotes = (int(len(electionresults)))
+
+    #Print to terminal
     print("Election Results\n-------------------------")
     print(f"Total Votes: {totalVotes}\n-------------------------")
 
@@ -62,9 +62,3 @@ with open(output_path, 'w') as csvfile:
     for w in range(len(candidates)):
         csvwriter.writerows(candidatesZip)
     csvwriter.writerow(['Winner: ',winner])
-
-
-    #Write the second row
-
-    #for w in range(5):
-        #csvwriter.writerows(rows)
