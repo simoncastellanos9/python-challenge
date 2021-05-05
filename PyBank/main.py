@@ -35,16 +35,20 @@ with open(csvpath) as csvfile:
                 greatDecMonth = row[0]
             changeCnt = changeCnt + change
         prevRow = int(row[1])
+    
 
-    aveChange = int(changeCnt/(length-1)) 
-       
+    total = "${:.0f}".format(total)
+    aveChange = "${:.2f}".format(int(changeCnt/(length-1)))
+    greatInc = "${:.0f}".format(greatInc)
+    greatDec = "${:.0f}".format(greatDec)
+
     print("\nFinancial Analysis")
     print("----------------------------")
     print(f"Total Months: {length}")
-    print(f"Total: ${total}")
-    print(f"Average  Change: ${aveChange}")
-    print(f"Greatest Increase in Profits: {greatIncMonth} (${greatInc})")
-    print(f"Greatest Decrease in Profits: {greatDecMonth} (${greatDec})")
+    print(f"Total: {total}")
+    print(f"Average  Change: {aveChange}")
+    print(f"Greatest Increase in Profits: {greatIncMonth} ({greatInc})")
+    print(f"Greatest Decrease in Profits: {greatDecMonth} ({greatDec})")
 
 
 index = ["Total Months","Total","Average Change", "Greatest Increase in Profits","Greatest Decrease in Profits"]
